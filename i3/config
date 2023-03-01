@@ -121,7 +121,7 @@ bindsym $mod+a focus parent
 set $ws1 "1: Misc"
 set $ws2 "2: Dev"
 set $ws3 "3: Gaming"
-set $ws4 "4"
+set $ws4 "4: Watch"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
@@ -202,6 +202,7 @@ exec --no-startup-id feh --no-fehbg --bg-fill $HOME/Pictures/bg2.jpg
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] flaoting enable
 for_window [class="Arandr"] floating enable
+for_window [title="Steam - News"] floating enable
 
 assign [class="discord"] $ws1
 assign [class="Steam"] $ws3
@@ -211,8 +212,8 @@ assign [class="bottles"] $ws3
 set $mode_display Config monitor resolution - Home (d) - On the go(t)
 
 mode "$mode_display" {
-    bindsym d exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off, mode "default"
-    bindsym t exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off 
+    bindsym d exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off, exec --no-startup-id ~/.config/polybar/scripts/launch_polybar.sh, mode "default"
+    bindsym t exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off, exec --no-startup-id ~/.config/polybar/scripts/launch_polybar.sh 
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -232,6 +233,11 @@ exec --no-startup-id "nm-applet"
 
 exec --no-startup-id "picom -b"
 
+exec --no-startup-id "i3-battery-popup -l 15 -n"
+
+exec --no-startup-id "dunst"
+
 exec --no-startup-id greenclip daemon>/dev/null
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
+
 
